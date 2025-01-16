@@ -14,26 +14,41 @@
 
 <body>
     <div class="container mt-4">
-        <ul class="nav nav-pills p-2">
-            <li class="nav-item p-2">
-                <a href="/home" class="nav-link">Home</a>
-            </li>
-            <li class="nav-item p-2">
-                <a href="/store" class="nav-link active">Store</a>
-            </li>
-            <li class="nav-item p-2">
-                <a href="/contactus" class="nav-link">Contact Us</a>
-            </li>
-            <li class="nav-item p-2">
-                <a href="/aboutus" class="nav-link">About Us</a>
-            </li>
-            <li class="nav-item p-2 text-white" style="margin-left: 600px;">
-                <a href="/cart" class="nav-link text-white bg-success">cart</a>
-            </li>
-            <li class="nav-item p-2 text-white ">
-                <a href="/logout" class="nav-link text-white bg-danger">Logout</a>
-            </li>
-        </ul>
+        <nav class="navbar navbar-expand-md p-2 d-flex justify-content-center">
+            <div class="container-fluid">
+                <a href="/home" class="navbar-brand">NavbarBrand</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#toggleNav"
+                    aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse " id="toggleNav">
+                    <ul class="navbar-nav nav-pills nav-success">
+                        <li class="nav-item p-2">
+                            <a href="/home" class="nav-link  p-2 ">Home</a>
+                        </li>
+                        <li class="nav-item p-2">
+                            <a href="/store" class="nav-link active bg-success text-white p-2">Store</a>
+                        </li>
+                        <li class="nav-item p-2">
+                            <a href="/contactus" class="nav-link p-2">Contact Us</a>
+                        </li>
+                        <li class="nav-item p-2">
+                            <a href="/aboutus" class="nav-link p-2">About Us</a>
+                        </li>
+
+                        <div class="d-flex">
+                            <li class="nav-item p-2 text-white ">
+                                <a href="/cart" class="nav-link">cart</a>
+                            </li>
+                            <li class="nav-item p-2 text-white">
+                                <a href="/logout" class="nav-link">Logout</a>
+                            </li>
+
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </nav>
     </div>
 
 

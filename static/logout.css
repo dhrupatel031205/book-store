@@ -1,0 +1,13 @@
+body{
+    background-image: url("https://images.pexels.com/photos/2908984/pexels-photo-2908984.jpeg?auto=compress&cs=tinysrgb&w=600");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+h1{
+    display: flex;
+    justify-content: center;
+    margin-top: 20vh;
+    border-radius: 500px;
+    background-color: aqua;
+}
