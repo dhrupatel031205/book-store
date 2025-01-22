@@ -1,4 +1,4 @@
-document.querySelectorAll('.addCart').forEach(button => {
+document.querySelectorAll('.addToCart').forEach(button => {
     button.addEventListener('click', function () {
         // Parse the book data from the data-book attribute
         const bookData = JSON.parse(this.getAttribute('data-book'));
@@ -13,7 +13,7 @@ document.querySelectorAll('.addCart').forEach(button => {
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data);
+            alert(data.message);
         })
         .catch(error => {
             console.error('Error:', error);
