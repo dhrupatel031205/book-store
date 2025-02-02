@@ -44,20 +44,23 @@
         {% for book in cartData %}
         <div class="card mb-3" style="max-width: 540px;">
             <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="{{ book[5] }}" class="img-fluid rounded-start" alt="...">
+                <div class="col col-md-4">
+                    <img src="{{ book[0][5] }}" class="img-fluid rounded-start" alt="...">
                 </div>
-                <div class="col-md-8">
+                <div class="col col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title">{{ book[1] }}</h5>
-                        <p class="card-text">Author: {{ book[2] }}</p>
-                        <p class="card-text">Price: ${{ book[3] }}</p>
+                        <h5 class="card-title">{{ book[0][1] }}</h5>
+                        <p class="card-text">Author: {{ book[0][2] }}</p>
+                        <p class="card-text">Price: ${{ book[0][3] }}</p>
                     </div>
                 </div>
             </div>
         </div>
         
         {% endfor %}
+    </div>
+    <div class="text-center mt-4">
+        <a href="/checkout" class="btn btn-primary btn-lg">Checkout</a>
     </div>
 
 </body>
