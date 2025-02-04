@@ -52,7 +52,7 @@ def send_cart_data(username):
     final_cart = []
     
     for b in book_list:
-        book = fetch_book_data(b[0][2])  # Assuming book_id is in index 2
+        book = fetch_book_data(b[2])  # Assuming book_id is in index 2
         print("Hello",book)
         
         if book:  # Ensure book is not None
@@ -64,7 +64,7 @@ def send_cart_data(username):
 @cart_bp.route('/checkout', methods=['GET'])
 def checkout():
     username = session['username']
-    cart_data = fetch_cart_data(username)
+    cart_data = send_cart_data(username)
 
     if not cart_data:  # Ensure cart is not empty
         flash("Your cart is empty. Add books before checkout!", "warning")
@@ -72,10 +72,7 @@ def checkout():
     
     total_price = 0
     for b in cart_data:
-        if len(b) > 3:  # Ensure there is a valid index 3
-            total_price += b[3]
-        else:
-            print(f"Error: Unexpected cart data structure: {b}")
+        total_price += float(b[3])
 
     return render_template('bill.html', cartData=cart_data, total=total_price)
 
@@ -92,3 +89,5 @@ def generate_bill(username):
     for b in books_list:
         bill += b[3] 
     return bill
+
+

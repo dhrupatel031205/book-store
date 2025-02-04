@@ -81,18 +81,19 @@ def add_to_cart():
             query = "INSERT INTO cart(username,book_id) VALUES(%s,%s)"
             cursor.execute(query,(username,book_id))
             conn.commit()
-
-
+            
         except Exception as e :
             return e
         
         
-        cart_stack.append(book_id)
         return jsonify({'message': 'Book added to cart successfully'}), 200
     except Exception as e:
         return jsonify({'message': str(e)}), 500
 
-
+    finally :
+        cursor.close()
+        conn.close()
+        
 
 @store_bp.route('/remove_from_cart', methods=['POST'])
 def remove_from_cart():
