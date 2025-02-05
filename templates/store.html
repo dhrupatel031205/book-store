@@ -11,76 +11,88 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
     <style>
-        .card {
-            overflow: hidden;
-            height: 320px; /* Initially shows only the image height */
-            transition: height 0.3s ease-in-out;
+        body {
+            background-color: #f8f9fa;
         }
 
-        .card-body {
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        .navbar {
+            background-color: #343a40 !important;
+        }
+
+        .navbar-brand, .nav-link {
+            color: white !important;
+        }
+
+        .card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            border: none;
+            overflow: hidden;
+            border-radius: 10px;
+            width: 200px;
         }
 
         .card:hover {
-            height: 100%; /* Expands the card to fit the full content */
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
 
-        .card:hover .card-body {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .card-title,
         .card-img-top {
-            transition: all 0.3s ease-in-out;
+            height: 180px;
+            object-fit: cover;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
         }
 
-        .card:hover .card-title {
-            color: #28a745;
+        .card-body {
+            text-align: center;
+        }
+
+        .btn-success {
+            width: 100%;
+            font-weight: bold;
         }
     </style>
 </head>
 
 <body>
-    <div class="container mt-4">
-        <nav class="navbar navbar-expand-md p-2 d-flex justify-content-center">
-            <div class="container-fluid">
-                <a href="/home" class="navbar-brand">NavbarBrand</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#toggleNav"
-                    aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="toggleNav">
-                    <ul class="navbar-nav nav-pills nav-success">
-                        <li class="nav-item p-2"><a href="/home" class="nav-link p-2">Home</a></li>
-                        <li class="nav-item p-2"><a href="/store"
-                                class="nav-link active bg-success text-white p-2">Store</a></li>
-                        <li class="nav-item p-2"><a href="/contactus" class="nav-link p-2">Contact Us</a></li>
-                        <li class="nav-item p-2">
-                            <a href="/profile" class="nav-link p-2">Profile</a>
-                        </li>
-                        <div class="d-flex">
-                            <li class="nav-item p-2 text-white"><a href="/cart" class="nav-link">Cart</a></li>
-                            <li class="nav-item p-2 text-white"><a href="/logout" class="nav-link">Logout</a></li>
-                        </div>
-                    </ul>
-                </div>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/home">BookStore</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a href="/home" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="/store" class="nav-link active bg-success rounded">Store</a></li>
+                    <li class="nav-item"><a href="/contactus" class="nav-link">Contact Us</a></li>
+                    <li class="nav-item"><a href="/profile" class="nav-link">Profile</a></li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a href="/cart" class="nav-link ">Cart</a></li>
+                    <li class="nav-item"><a href="/logout" class="nav-link ">Logout</a></li>
+                </ul>
             </div>
-        </nav>
-    </div>
+        </div>
+    </nav>
 
-    <div class="container">
-        <div class="row">
+    <div class="container mt-4">
+        <div class="row justify-content-center">
             {% for book in booksData %}
-            <div class="col-md-4 mb-3">
+            <div class="col-md-3 mb-4 d-flex justify-content-center">
                 <div class="card h-100">
-                    <img src="{{ book[5] }}" class="card-img-top" alt="Book Image" height="300">
+                    <img src="{{ book[5] }}" class="card-img-top" alt="Book Image">
                     <div class="card-body">
-                        <h5 class="card-title">{{ book[1] }}</h5>
-                        <p class="card-text">Author: {{ book[2] }}</p>
-                        <p class="card-text">Price: ${{ book[3] }}</p>
+                        <h6 class="card-title">{{ book[1] }}</h6>
+                        <p class="card-text text-muted">Author: {{ book[2] }}</p>
+                        <p class="card-text fw-bold">Price: ${{ book[3] }}</p>
+                        <select class="form-select mb-2">
+                            <option selected>Quantity</option>
+                            {% for i in range(book[6]) %}
+                            <option value="{{ i+1 }}">{{ i+1 }}</option>
+                            {% endfor %}
+                        </select>
                         <button class="btn btn-success addToCart" 
                                 data-book='{"id": "{{ book[0] }}", "name": "{{ book[1] }}", "author": "{{ book[2] }}", "price": "{{ book[3] }}"}'>
                             Add to Cart
@@ -91,7 +103,7 @@
             {% endfor %}
         </div>
     </div>
+    
     <script src="../static/js/store.js"></script>
 </body>
-
 </html>

@@ -90,4 +90,3 @@ def generate_bill(username):
         bill += b[3] 
     return bill
 
-

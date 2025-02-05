@@ -1,5 +1,41 @@
-body{
-    background-image: url("https://images.pexels.com/photos/9247608/pexels-photo-9247608.jpeg?auto=compress&cs=tinysrgb&w=600");
-    background-repeat: no-repeat;
-    background-size: cover;
+
+
+body {
+    background-color: #f8f9fa;
+}
+
+.navbar {
+    background-color: #343a40 !important;
+}
+
+.navbar-brand, .nav-link {
+    color: white !important;
+}
+
+.card {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    border: none;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-img-top {
+    height: 500px;
+    object-fit: cover;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.card-body {
+    text-align: center;
+}
+
+.btn-success {
+    width: 100%;
+    font-weight: bold;
 }
