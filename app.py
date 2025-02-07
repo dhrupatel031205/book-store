@@ -7,9 +7,11 @@ from home import home_bp
 from cart import cart_bp
 from aboutus import aboutus_bp
 from contactus import contactus_bp
+from contactus import configure_mail
 
 app = flask.Flask(__name__)
 
+configure_mail(app)
 app.register_blueprint(login_bp)
 app.register_blueprint(logout_bp)
 app.register_blueprint(signup_bp)

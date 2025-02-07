@@ -29,22 +29,7 @@
             border-radius: 5px;
         }
 
-        .profile-card {
-            max-width: 540px;
-            margin: 20px auto;
-        }
 
-        .profile-img {
-            height: 400px;
-            object-fit: cover;
-            width: 100%;
-            border-radius: 10px;
-        }
-
-        .card-body h4 {
-            font-size: 1.8rem;
-            color: #28a745;
-        }
     </style>
 </head>
 
@@ -76,17 +61,15 @@
     <div class="container mt-4">
         <div class="card profile-card mb-3">
             <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="https://images.pexels.com/photos/3778876/pexels-photo-3778876.jpeg?auto=compress&cs=tinysrgb&w=600"
-                        class="profile-img img-fluid rounded-start" alt="Profile Image">
-                </div>
                 <div class="col-md-8">
                     <div class="card-body">
                         <h4>User Details:</h4>
-                        <!-- Add the user details here, such as Name, Email, etc. -->
-                        <p><strong>Name:</strong> Dhruv Patel</p>
-                        <p><strong>Email:</strong> example@email.com</p>
+                        {% for user in userdata %}
+                        <p><strong>Username:</strong> {{user[1]}}</p>
+                        <p><strong>Name:</strong> {{user[3]}}</p>
+                        <p><strong>Email:</strong> {{user[4]}}</p>
                         <p><strong>Address:</strong> 123 Street Name, City, Country</p>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
