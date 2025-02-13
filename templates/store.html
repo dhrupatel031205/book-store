@@ -12,11 +12,11 @@
     </script>
     <style>
         body {
-            background-color: #6495c5;
+            background-color: #b0d7ff;
         }
 
         .navbar {
-            background-color: #1a589703 !important;
+            background-color: #343a40 !important;
         }
 
         .navbar-brand, .nav-link {
@@ -80,13 +80,13 @@
     <div class="container mt-4">
         <div class="row justify-content-center">
             {% for book in booksData %}
-            <div class="col-md-3 mb-4 d-flex justify-content-center">
+            <div class="col-md-3 col-lg-2 col-sm-4 mb-4 d-flex justify-content-center">
                 <div class="card h-100">
                     <img src="{{ book[5] }}" class="card-img-top" alt="Book Image">
                     <div class="card-body">
                         <h6 class="card-title">{{ book[1] }}</h6>
                         <p class="card-text text-muted">Author: {{ book[2] }}</p>
-                        <p class="card-text fw-bold">Price: ${{ book[3] }}</p>
+                        <p class="card-text fw-bold">Price: Rs. {{ book[3] }}</p>
                         <select class="form-select mb-2">
                             <option selected>Quantity</option>
                             {% for i in range(book[6]) %}
