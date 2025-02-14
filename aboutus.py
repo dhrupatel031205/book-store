@@ -33,3 +33,39 @@ def aboutus():
     cart = session.get('cartData')
 
     return render_template('aboutus.html', userdata=user)
+
+def fetch_cart_data(username):
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        query = "SELECT * FROM cart WHERE username = %s"
+        cursor.execute(query, (username,))
+        cartdata = cursor.fetchall()
+        return cartdata
+    except Exception as e:
+        print("Database error:", e)
+        return None
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
+
+def fetch_order_data(username) :
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        query = "SELECT * FROM orders WHERE username = %s"
+        cursor.execute(query, (username,))
+        ordersdata = cursor.fetchall()
+        return ordersdata
+    except Exception as e:
+        print("Database error:", e)
+        return None
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()

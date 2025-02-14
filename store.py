@@ -42,7 +42,7 @@ def add_to_cart():
             return jsonify({'message': 'User not logged in'}), 401
 
         book_id = book_data.get('id')
-        quantity = book_data.get('quantity', 1)  # Default to 1 if not provided
+        quantity = book_data.get('quantity')  # Default to 1 if not provided
 
         if not book_id:
             return jsonify({'message': 'Book ID not provided'}), 400
@@ -95,6 +95,8 @@ def add_to_cart():
         return jsonify({'message': 'Book added to cart successfully'}), 200
     except Exception as e:
         return jsonify({'message': str(e)}), 500
+
+
 @store_bp.route('/remove_from_cart', methods=['POST'])
 def remove_from_cart():
     if not request.is_json:
@@ -114,13 +116,27 @@ def remove_from_cart():
         try:
             conn = get_db_connection()
             cursor = conn.cursor()
-            query = "DELETE FROM cart WHERE username = %s AND book_id = %s"
-            cursor.execute(query, (username, book_id))
+
+            # Step 1: Get the quantity of the book in the cart before deletion
+            cursor.execute("SELECT quantity FROM cart WHERE username = %s AND book_id = %s", (username, book_id))
+            result = cursor.fetchone()
+
+            if not result:
+                return jsonify({'success': False, 'message': 'Book not found in cart'}), 404
+            
+            quantity_in_cart = result[0]
+
+            # Step 2: Delete the book from the cart
+            cursor.execute("DELETE FROM cart WHERE username = %s AND book_id = %s", (username, book_id))
+
+            # Step 3: Update the quantity in the books table
+            cursor.execute("UPDATE books SET qty = qty + %s WHERE id = %s", (quantity_in_cart, book_id))
+
             conn.commit()
             cursor.close()
             conn.close()
 
-            return jsonify({'success': True, 'message': 'Book removed from cart successfully'}), 200
+            return jsonify({'success': True, 'message': 'Book removed from cart and stock updated'}), 200
         except Exception as e:
             return jsonify({'success': False, 'message': str(e)}), 500
     except Exception as e:

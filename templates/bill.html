@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,7 +28,6 @@
         }
     </style>
 </head>
-
 <body>
     <div class="container mt-4">
         <h2 class="text-center">Your Bill</h2>
@@ -47,11 +45,11 @@
             <tbody>
                 {% for book in cartData %}
                 <tr>
-                    <td>{{ book[1] }}</td>
-                    <td>{{ book[2] }}</td>
-                    <td>Rs. {{ book[3] }}</td>
-                    <td>{{ book[6] }}</td>  <!-- Quantity -->
-                    <td>Rs. {{ book[3] * book[6] }}</td>  <!-- Price * Quantity -->
+                    <td>{{ book['title'] }}</td>
+                    <td>{{ book['author'] }}</td>
+                    <td>Rs. {{ book['price'] }}</td>
+                    <td>{{ book["quantity"] }}</td>  
+                    <td>Rs. {{ book["total_price"] }}</td>  
                 </tr>
                 {% endfor %}
             </tbody>
@@ -61,9 +59,16 @@
 
         <div class="text-center mt-4">
             <a href="/store" class="btn btn-success">Continue Shopping</a>
-            <a href="/payment" class="btn btn-primary">Proceed to Payment</a>
+            <button class="btn btn-primary" id="proceedPayment">Proceed to Payment</button>
         </div>
     </div>
-</body>
 
+    <script>
+        document.getElementById("proceedPayment").addEventListener("click", function() {
+            if (confirm("Your order has been placed successfully!")) {
+                window.location.href = "/place_order";
+            }
+        });
+    </script>
+</body>
 </html>
