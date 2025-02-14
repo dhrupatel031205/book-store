@@ -8,11 +8,15 @@ def cart():
     if 'username' not in session:
         return redirect(url_for('auth.login'))  
     
-    username = session['username']
+    username = session.get('username')
     cart_data = send_cart_data(username)
-    return render_template('cart.html', cartData=cart_data)
+    
+    session['cartData'] = cart_data if cart_data else []  # Ensure session key always has a value
+    return render_template('cart.html', cartData=session['cartData'])
 
 def fetch_cart_data(username):
+    conn = None
+    cursor = None
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
@@ -21,16 +25,19 @@ def fetch_cart_data(username):
         cursor.execute(query, (username,))
         
         cart_data = cursor.fetchall()
-        
-        return cart_data
+        return cart_data if cart_data else []
     except Exception as e:
         print(f"Error fetching cart data: {e}")
         return []
     finally:
-        cursor.close()
-        conn.close()
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
 
 def fetch_book_data(book_id):
+    conn = None
+    cursor = None
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
@@ -38,14 +45,15 @@ def fetch_book_data(book_id):
         query = "SELECT * FROM books WHERE id = %s"
         cursor.execute(query, (book_id,))
         book_data = cursor.fetchone()  
-        return book_data
+        return book_data if book_data else None
     except Exception as e:
-        print(e)
+        print(f"Error fetching book data: {e}")
         return None 
     finally:
-        cursor.close()
-        conn.close()
-
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
 
 def send_cart_data(username):
     book_list = fetch_cart_data(username)
@@ -53,40 +61,34 @@ def send_cart_data(username):
     
     for b in book_list:
         book = fetch_book_data(b[2])  # Assuming book_id is in index 2
-        print("Hello",book)
-        
-        if book:  # Ensure book is not None
+        if book:
             final_cart.append(book)
         else:
             print(f"Warning: Book with ID {b[2]} not found!")
     
-    return final_cart
+    return final_cart if final_cart else []
+
 @cart_bp.route('/checkout', methods=['GET'])
 def checkout():
-    username = session['username']
+    username = session.get('username')
+    if not username:
+        flash("You need to log in to checkout!", "danger")
+        return redirect(url_for('auth.login'))  # Redirect to login page
+
     cart_data = send_cart_data(username)
 
-    if not cart_data:  # Ensure cart is not empty
+    if not cart_data:
         flash("Your cart is empty. Add books before checkout!", "warning")
-        return redirect(url_for('cart.cart'))  # Redirect back to cart
-    
-    total_price = 0
-    for b in cart_data:
-        total_price += float(b[3])
+        return redirect(url_for('cart.cart'))  
+
+    total_price = sum(float(b[3]) for b in cart_data)
 
     return render_template('bill.html', cartData=cart_data, total=total_price)
 
-def cart_book_id(username) :
-    books = []
+def cart_book_id(username):
     books_list = fetch_cart_data(username)
-    for b in books_list :
-        books.append(b[1])
-    return books
+    return [b[1] for b in books_list]
 
 def generate_bill(username):
-    bill = 0
     books_list = fetch_cart_data(username)
-    for b in books_list:
-        bill += b[3] 
-    return bill
-
+    return sum(b[3] for b in books_list)

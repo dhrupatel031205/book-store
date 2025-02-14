@@ -9,7 +9,7 @@
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-  </script>
+    </script>
   <style>
     body {
       background-color: #f8f9fa;
@@ -79,43 +79,43 @@
   <!-- Cart Items -->
   <div class="container mt-4">
     {% if cartData %}
-      <div class="row">
-        <div class="col-md-8">
-          {% for book in cartData %}
-          <div class="card mb-3">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img src="{{ book[5] }}" class="img-fluid rounded-start" alt="{{ book[1] }}">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">{{ book[1] }}</h5>
-                  <p class="card-text">Author: {{ book[2] }}</p>
-                  <p class="card-text">Price: Rs. {{ book[3] }}</p>
-                  <p class="card-text">Quantity: <span class="quantity">{{ book[6] }}</span></p>
-                  <p class="card-text total-price">Total: Rs. <span class="total">{{ book[3] * book[6] }}</span></p>
-                  <button class="btn btn-danger remove-item" data-book-id="{{ book[0] }}">Remove</button>
-                </div>
+    <div class="row">
+      <div class="col-md-8">
+        {% for book in cartData %}
+        <div class="card mb-3">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="{{ book[5] }}" class="img-fluid rounded-start" alt="{{ book[1] }}">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">{{ book[1] }}</h5>
+                <p class="card-text">Author: {{ book[2] }}</p>
+                <p class="card-text">Price: Rs. {{ book[3] }}</p>
+                <p class="card-text">Quantity: <span class="quantity">{{ book[6] }}</span></p>
+                <p class="card-text total-price">Total: Rs. <span class="total">{{ book[3] * book[6] }}</span></p>
+                <button class="btn btn-danger remove-item" data-book-id="{{ book[0] }}">Remove</button>
               </div>
             </div>
           </div>
-          {% endfor %}
         </div>
+        {% endfor %}
+      </div>
 
-        <!-- Order Summary -->
-        <div class="col-md-4">
-          <div class="card p-3">
-            <h4 class="text-center">Order Summary</h4>
-            <p class="total-price text-center">Grand Total: Rs. <span id="grand-total">0</span></p>
-            <a href="/checkout" class="btn btn-primary btn-lg w-100">Checkout</a>
-          </div>
+      <!-- Order Summary -->
+      <div class="col-md-4">
+        <div class="card p-3">
+          <h4 class="text-center">Order Summary</h4>
+          <p class="total-price text-center">Grand Total: Rs. <span id="grand-total">0</span></p>
+          <a href="/checkout" class="btn btn-primary btn-lg w-100">Checkout</a>
         </div>
       </div>
+    </div>
     {% else %}
-      <div class="text-center mt-5">
-        <h3>Your cart is empty</h3>
-        <a href="/store" class="btn btn-success mt-3">Go to Store</a>
-      </div>
+    <div class="text-center mt-5">
+      <h3>Your cart is empty</h3>
+      <a href="/store" class="btn btn-success mt-3">Go to Store</a>
+    </div>
     {% endif %}
   </div>
 
@@ -137,7 +137,8 @@
           fetch("/remove_from_cart", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ book_id: bookId })
+            body: JSON.stringify({ id: bookId }) // Match backend expectation
+
           }).then(response => response.json())
             .then(data => {
               if (data.success) {
@@ -153,4 +154,5 @@
   </script>
 
 </body>
+
 </html>

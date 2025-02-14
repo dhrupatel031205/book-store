@@ -95,7 +95,6 @@ def add_to_cart():
         return jsonify({'message': 'Book added to cart successfully'}), 200
     except Exception as e:
         return jsonify({'message': str(e)}), 500
-
 @store_bp.route('/remove_from_cart', methods=['POST'])
 def remove_from_cart():
     if not request.is_json:
@@ -103,13 +102,14 @@ def remove_from_cart():
 
     try:
         book_data = request.json
-        book_id = book_data.get('id')
+        book_id = book_data.get('id')  # Fix key mismatch
         username = session.get('username')
+
         if not username:
-            return jsonify({'message': 'User not logged in'}), 401
+            return jsonify({'success': False, 'message': 'User not logged in'}), 401
 
         if not book_id:
-            return jsonify({'message': 'Book ID not provided'}), 400
+            return jsonify({'success': False, 'message': 'Book ID not provided'}), 400
 
         try:
             conn = get_db_connection()
@@ -117,14 +117,11 @@ def remove_from_cart():
             query = "DELETE FROM cart WHERE username = %s AND book_id = %s"
             cursor.execute(query, (username, book_id))
             conn.commit()
+            cursor.close()
+            conn.close()
+
+            return jsonify({'success': True, 'message': 'Book removed from cart successfully'}), 200
         except Exception as e:
-            return jsonify({'message': str(e)}), 500
-        finally:
-            if cursor:
-                cursor.close()
-            if conn:
-                conn.close()
-        
-        return jsonify({'message': 'Book removed from cart successfully'}), 200
+            return jsonify({'success': False, 'message': str(e)}), 500
     except Exception as e:
-        return jsonify({'message': str(e)}), 500
+        return jsonify({'success': False, 'message': str(e)}), 500
