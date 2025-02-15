@@ -9,19 +9,19 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-    </script>
-    <style>
-        body {
-            background-color: #b0d7ff;
-        }
+        </script>
+    <link rel="stylesheet" href="../static/main.css">
 
+    <style>
         .navbar {
             background-color: #343a40 !important;
         }
 
-        .navbar-brand, .nav-link {
+        .nav-link {
             color: white !important;
+            font-size: 18px;
         }
+
 
         .card {
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
@@ -56,32 +56,34 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container">
-            <a class="navbar-brand" href="/home">BookStore</a>
+        <div class="container p-4">
+            <a class="navbar-brand" href="/home"><img src="{{ url_for('static', filename='images/logo.png') }}?v=1"
+                    style="height: 120px; border-radius: 50%; " alt="" />
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a href="/home" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="/store" class="nav-link active bg-success rounded">Store</a></li>
-                    <li class="nav-item"><a href="/contactus" class="nav-link">Contact Us</a></li>
-                    <li class="nav-item"><a href="/profile" class="nav-link">Profile</a></li>
+                    <li class="nav-item"><a href="/home" class="nav-link p-3">Home</a></li>
+                    <li class="nav-item"><a href="/store" class="nav-link p-3 active bg-success rounded">Store</a></li>
+                    <li class="nav-item"><a href="/contactus" class="nav-link p-3">Contact Us</a></li>
+                    <li class="nav-item"><a href="/profile" class="nav-link p-3">Profile</a></li>
                 </ul>
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a href="/cart" class="nav-link ">Cart</a></li>
-                    <li class="nav-item"><a href="/logout" class="nav-link ">Logout</a></li>
+                    <li class="nav-item"><a href="/cart" class="nav-link p-3 ">Cart</a></li>
+                    <li class="nav-item"><a href="/logout" class="nav-link p-3 ">Logout</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div class="container mt-4">
+    <div class="container mt-4 ">
         <div class="row justify-content-center">
             {% for book in booksData %}
-            <div class="col-md-3 col-lg-2 col-sm-4 mb-4 d-flex justify-content-center">
-                <div class="card h-100">
+            <div class=" col-md-3 col-lg-2 col-sm-4 mb-4 d-flex justify-content-center ">
+                <div class="card h-100 bg-light m-2">
                     <img src="{{ book[5] }}" class="card-img-top" alt="Book Image">
                     <div class="card-body">
                         <h6 class="card-title">{{ book[1] }}</h6>
@@ -93,8 +95,8 @@
                             <option value="{{ i+1 }}">{{ i+1 }}</option>
                             {% endfor %}
                         </select>
-                        <button class="btn btn-success addToCart" 
-                                data-book='{"id": "{{ book[0] }}", "name": "{{ book[1] }}", "author": "{{ book[2] }}", "price": "{{ book[3] }}"}'>
+                        <button class="btn btn-success addToCart"
+                            data-book='{"id": "{{ book[0] }}", "name": "{{ book[1] }}", "author": "{{ book[2] }}", "price": "{{ book[3] }}"}'>
                             Add to Cart
                         </button>
                     </div>
@@ -103,7 +105,8 @@
             {% endfor %}
         </div>
     </div>
-    
+
     <script src="../static/js/store.js"></script>
 </body>
+
 </html>

@@ -8,4 +8,9 @@
     margin: 10px;
 }
 
-
+body{
+    padding: 50px;
+    background-image: url("https://images.pexels.com/photos/415078/pexels-photo-415078.jpeg?auto=compress&cs=tinysrgb&w=600");
+    background-repeat: no-repeat;
+    background-size: cover;
+}

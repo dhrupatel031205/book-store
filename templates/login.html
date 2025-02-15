@@ -12,13 +12,15 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/static/index.css">
     
-    <link rel="stylesheet" href="/static/style.css">
 </head>
 
 <body>
-    <div class="container d-flex justify-content-center align-items-center center-container">
+    <div class="container d-flex justify-content-center align-items-center center-container bg-info p-4">
         <div class="text-center">
-            <div class="display-4 mb-4 text-white">Log In</div>
+            <img src="{{ url_for('static', filename='images/logo.png') }}?v=1"
+            style="height: 150px; border-radius: 20px; " alt="" /><br>
+
+            <div class="display-4 mb-4 ">Log In</div>
             <form action="{{ url_for('login.login') }}" method="POST">
                 <input type="text" name="username" class="form-control inputs mb-2" placeholder="Username" required>
                 <input type="password" name="password" class="form-control inputs mb-2" placeholder="Password" required>

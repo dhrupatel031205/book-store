@@ -9,7 +9,8 @@ def signup():
         email = request.form.get('email')
         username = request.form.get('username')
         password = request.form.get('password')
-
+        address = request.form.get('address')
+        
         try:
             conn = get_db_connection()
             cursor = conn.cursor()
@@ -21,8 +22,8 @@ def signup():
                 flash('Username or email already exists. Please choose another.', 'error')
                 return redirect(url_for('signup.signup'))
 
-            cursor.execute('INSERT INTO users (name, email, username, password) VALUES (%s, %s, %s, %s)',
-                           (name, email, username, password))
+            cursor.execute('INSERT INTO users (name, email, username, password, address) VALUES (%s,%s, %s, %s, %s)',
+                           (name, email, username, password, address))
             conn.commit()
             flash('Account created successfully! You can now log in.', 'success')
             

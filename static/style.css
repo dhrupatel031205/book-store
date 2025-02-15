@@ -1,5 +1,3 @@
-
-
 body {
     background-color: #609ddb;
 }
@@ -10,7 +8,7 @@ body {
 
 .navbar-brand, .nav-link {
     color: white !important;
-}
+}   
 
 .card {
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;

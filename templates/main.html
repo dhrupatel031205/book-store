@@ -11,16 +11,31 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/static/index.css">
-    <link rel="stylesheet" href="/static/style.css">
 </head>
 
 <body>
-    <div class="container mt-5 display-4 text-center ">
-        Welcome to Book Store
+    <div class="container mt-3 display-4 text-center bg-info p-4">
+        <img src="{{ url_for('static', filename='images/logo.png') }}?v=1"
+                    style="height: 150px; border-radius: 20px; " alt="" /><br>
+        Welcome to E-Granthalaya
         <div class="container mt-3">
             <a class="btn btn-success button  text-white" href="/login">Log In</a>
             <a class="btn btn-success button  text-white" href="/signup">Sign Up</a>
         </div>
+    </div>
+    <div class="container mt-2 p-2 bg-info">
+        <h1 class="container text-center">
+            About E-Granthalaya
+        </h1>
+        <p class="container" style="font-size: 20px;">
+              E-Granthalaya   is a digital bookstore project designed to provide an interactive and user-friendly experience for book lovers. Developed using   HTML, CSS, JavaScript, and Flask  , it offers a seamless platform for users to explore, browse, and manage books efficiently. The project integrates   user authentication  , allowing users to sign up, log in, and securely access their accounts.  
+
+            The   book store   section showcases a collection of books, where users can search, filter, and view book details. Additionally, the   cart system   enables users to add books they are interested in and manage their selections before proceeding with any actions. The   database interaction   is handled using   XAMPP  , ensuring that book details and user information are stored and retrieved efficiently.  
+            
+            A well-structured   contact us page   allows users to submit inquiries or provide feedback, making communication easier. The   about us page   highlights the purpose and vision of E-Granthalaya, giving users insight into the platform.   Session management   ensures that users remain logged in until they decide to log out, enhancing security and convenience.  
+            
+            The entire project follows a   responsive design  , ensuring a smooth experience across different devices, including desktops, tablets, and smartphones. With a focus on simplicity and functionality,   E-Granthalaya   aims to create a modern and efficient digital bookstore where users can engage with books effortlessly. It serves as a great platform for book enthusiasts looking for a streamlined and interactive reading experience.
+        </p>
     </div>
 </body>
 
