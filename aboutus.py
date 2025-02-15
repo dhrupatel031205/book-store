@@ -69,3 +69,19 @@ def fetch_order_data(username) :
             cursor.close()
         if conn:
             conn.close()
+
+
+@aboutus_bp.route('/update_profile', methods=['POST'])
+def update_profile():
+    username = session['username']
+    name = request.form['name']
+    email = request.form['email']
+    address = request.form['address']
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("UPDATE users SET name = %s, email = %s, address = %s WHERE username = %s", (name, email, address, username))
+    conn.commit()
+    conn.close()
+
+    return redirect(url_for('aboutus.aboutus'))
