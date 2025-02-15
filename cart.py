@@ -95,9 +95,8 @@ def generate_bill(username):
     """Calculate the total price of books in the cart."""
     return sum(item['total_price'] for item in fetch_cart_details(username))
 
-def total_cart_rate() :
-    total = 0
-    for price in cart_total:
-        total += price
+def total_cart_rate():
+    """Calculate total price dynamically instead of relying on a global variable."""
+    total = sum(item['total_price'] for item in session.get('cartData', []))
     session['total'] = total
-    return total 
+    return total

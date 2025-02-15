@@ -9,86 +9,123 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../static/main.css">
     <style>
-        .navbar {
-            background-color: #343a40 !important;
+        body {
+            opacity: 0;
+            animation: fadeIn 1s ease-in forwards;
+        }
+        .nav-link{
+            font-size: 18px !important;
         }
 
-        .navbar-brand,
-        .nav-link {
-            font-size: 18px;
-            color: white !important;
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
 
-        .carousel-item img {
-            height: 500px;
-            object-fit: cover;
-            border-radius: 10px;
+        .navbar, .carousel, .featured-books {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUp 0.8s ease-in-out forwards;
         }
 
-        .welcome {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #28a745;
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            opacity: 0;
+            transform: scale(0.8);
+            animation: zoomIn 0.8s ease-in-out forwards;
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .review-form, .reviews-section {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s ease-in-out;
+        }
+
+        .reviews-section {
+            transform: translateX(50px);
+        }
+
+        .visible {
+            opacity: 1;
+            transform: translateX(0);
         }
     </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container p-4">
-            <a class="navbar-brand" href="/home"><img src="{{ url_for('static', filename='images/logo.png') }}?v=1"
-                    style="height: 120px; border-radius: 50%; " alt="" />
+            <a class="navbar-brand" href="/home">
+                <img src="{{ url_for('static', filename='images/logo.png') }}?v=1" style="height: 120px; border-radius: 50%;" alt="" />
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a href="/home" class="nav-link p-3  active bg-success rounded">Home</a></li>
-                    <li class="nav-item"><a href="/store" class="nav-link p-3 ">Store</a></li>
-                    <li class="nav-item"><a href="/contactus" class="nav-link p-3">Contact Us</a></li>
-                    <li class="nav-item"><a href="/profile" class="nav-link p-3">Profile</a></li>
+                    <li class="nav-item"><a href="/home" class="p- nav-link active bg-success rounded">Home</a></li>
+                    <li class="nav-item"><a href="/store" class="p- nav-link">Store</a></li>
+                    <li class="nav-item"><a href="/contactus" class="p- nav-link">Contact Us</a></li>
+                    <li class="nav-item"><a href="/profile" class="p- nav-link">Profile</a></li>
                 </ul>
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a href="/cart" class="nav-link p-3">Cart</a></li>
-                    <li class="nav-item"><a href="/logout" class="nav-link p-3 ">Logout</a></li>
+                    <li class="nav-item"><a href="/cart" class="p- nav-link">Cart</a></li>
+                    <li class="nav-item"><a href="/logout" class="p- nav-link">Logout</a></li>
                 </ul>
             </div>
         </div>
     </nav>
-
     <div class="container mt-4">
         <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="https://images.pexels.com/photos/4861361/pexels-photo-4861361.jpeg" class="d-block w-100"
-                        alt="Slide 1">
+                    <img src="https://images.pexels.com/photos/4861361/pexels-photo-4861361.jpeg" class="d-block   w-100" style="height: 500px;" alt="Slide 1">
                 </div>
                 <div class="carousel-item">
-                    <img src="https://images.pexels.com/photos/9572664/pexels-photo-9572664.jpeg" class="d-block w-100"
-                        alt="Slide 2">
+                    <img src="https://images.pexels.com/photos/9572664/pexels-photo-9572664.jpeg" class="d-block  w-100" style="height: 500px;" alt="Slide 2">
                 </div>
                 <div class="carousel-item">
-                    <img src="https://images.pexels.com/photos/45717/pexels-photo-45717.jpeg" class="d-block w-100"
-                        alt="Slide 3">
+                    <img src="https://images.pexels.com/photos/45717/pexels-photo-45717.jpeg" class="d-block  w-100" style="height: 500px;" alt="Slide 3">
                 </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-                data-bs-slide="prev">
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
-                data-bs-slide="next">
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
     </div>
-    <div class="container mt-5">
+    
+    <div class="container mt-5 featured-books">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="mb-0">Featured Books</h2>
             <a href="/store" class="btn btn-primary">Explore More</a>
@@ -107,7 +144,8 @@
             {% endfor %}
         </div>
     </div>
-    <div class="container mt-5 p-5" style="background: #8bab84;">
+
+    <div class="container mt-5 p-5 review-form" style="background: #8bab84;">
         <h2 class="text-center">Leave a Review</h2>
         <form action="/add_review" method="POST">
             <div class="mb-3">
@@ -121,7 +159,8 @@
             <button type="submit" class="btn btn-success">Submit Review</button>
         </form>
     </div>
-    <div class="container mt-5">
+
+    <div class="container mt-5 reviews-section">
         <h2 class="text-center mb-4">Recent Reviews</h2>
         <div class="row justify-content-center">
             {% for review in reviews %}
@@ -139,6 +178,15 @@
         </div>
     </div>
 
+    <script>
+        document.addEventListener("scroll", function() {
+            document.querySelectorAll(".review-form, .reviews-section").forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight - 100) {
+                    el.classList.add("visible");
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

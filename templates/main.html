@@ -4,31 +4,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+    <title>Main Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/index.css">
+    <style>
+        body {
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .container {
+            transform: translateY(30px);
+            opacity: 0;
+            animation: slideUp 0.8s ease-in-out forwards 0.5s;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .btn {
+            transform: scale(0.8);
+            opacity: 0;
+            animation: popIn 0.5s ease-in-out forwards 1s;
+        }
+
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
 </head>
 
 <body>
     <div class="container mt-3 display-4 text-center bg-info p-4">
         <img src="{{ url_for('static', filename='images/logo.png') }}?v=1"
-                    style="height: 150px; border-radius: 20px; " alt="" /><br>
+            style="height: 150px; border-radius: 20px; " alt="" /><br>
         Welcome to E-Granthalaya
         <div class="container mt-3">
-            <a class="btn btn-success button  text-white" href="/login">Log In</a>
-            <a class="btn btn-success button  text-white" href="/signup">Sign Up</a>
+            <a class="btn btn-success text-white" href="/login">Log In</a>
+            <a class="btn btn-success text-white" href="/signup">Sign Up</a>
         </div>
     </div>
     <div class="container mt-2 p-2 bg-info">
-        <h1 class="container text-center">
-            About E-Granthalaya
-        </h1>
-        <p class="container" style="font-size: 20px;">
-              E-Granthalaya   is a digital bookstore project designed to provide an interactive and user-friendly experience for book lovers. Developed using   HTML, CSS, JavaScript, and Flask  , it offers a seamless platform for users to explore, browse, and manage books efficiently. The project integrates   user authentication  , allowing users to sign up, log in, and securely access their accounts.  
+        <h1 class="text-center">About E-Granthalaya</h1>
+        <p style="font-size: 20px;">
+            
+            E-Granthalaya   is a digital bookstore project designed to provide an interactive and user-friendly experience for book lovers. Developed using   HTML, CSS, JavaScript, and Flask  , it offers a seamless platform for users to explore, browse, and manage books efficiently. The project integrates   user authentication  , allowing users to sign up, log in, and securely access their accounts.  
 
             The   book store   section showcases a collection of books, where users can search, filter, and view book details. Additionally, the   cart system   enables users to add books they are interested in and manage their selections before proceeding with any actions. The   database interaction   is handled using   XAMPP  , ensuring that book details and user information are stored and retrieved efficiently.  
             
