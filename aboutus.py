@@ -26,7 +26,6 @@ def update_profile():
     cursor = conn.cursor()
     
     update_query = "UPDATE users SET name = %s, email = %s, address = %s WHERE username = %s"
-    logging.info(f"Executing Query: {update_query} | Params: ({name}, {email}, {address}, {username})")
 
     cursor.execute(update_query, (name, email, address, username))
     conn.commit()
@@ -47,7 +46,6 @@ def fetch_user_data(username):
         
         return userdata
     except Exception as e:
-        logging.error(f"Database error in fetch_user_data: {e}")
         return None
     finally:
         if cursor:
@@ -77,7 +75,6 @@ def fetch_order_data(username):
         
         return order_details
     except Exception as e:
-        logging.error(f"Database error in fetch_order_data: {e}")
         return []  # Return empty list to prevent 'NoneType' errors
     finally:
         if cursor:
