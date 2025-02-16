@@ -100,3 +100,48 @@ def total_cart_rate():
     total = sum(item['total_price'] for item in session.get('cartData', []))
     session['total'] = total
     return total
+@cart_bp.route('/payment', methods=['POST'])
+def payment():
+    print("🔹 Payment route triggered")
+    
+    if 'username' not in session:
+        flash("You need to log in to proceed to payment!", "danger")
+        return redirect(url_for('auth.login'))
+    
+    username = session.get('username')
+    cart_data = session.get('cartData', [])
+    total_price = total_cart_rate()
+
+
+    if not cart_data:
+        flash("Your cart is empty!", "warning")
+        return redirect(url_for('cart.cart'))
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    try:
+        # Prepare order details as space-separated strings
+        book_ids = " ".join(str(item['id']) for item in cart_data)
+        quantities = " ".join(str(item['quantity']) for item in cart_data)
+
+        # Insert order details into the orders table
+        order_query = """
+        INSERT INTO orders (username, book_id, qty, bill_amount)
+        VALUES (%s, %s, %s, %s)
+        """
+        cursor.execute(order_query, (username, book_ids, quantities, total_price))
+        
+        cursor.execute("DELETE FROM cart WHERE username = %s", (username,))
+        
+        conn.commit()
+        flash("Order placed successfully! Redirecting to payment...", "success")
+        
+    except Exception as e:
+        conn.rollback()
+        flash(f"Error processing order: {e}", "danger")
+    finally:
+        cursor.close()
+        conn.close()
+    
+    return redirect(url_for('aboutus.aboutus'))

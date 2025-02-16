@@ -1,0 +1,115 @@
+2025-02-16 10:22:33,159 -  * Debugger is active!
+2025-02-16 10:22:33,161 -  * Debugger PIN: 106-718-497
+2025-02-16 10:22:38,646 - Executing Query: SELECT * FROM users WHERE username = %s | Params: drp
+2025-02-16 10:22:38,647 - Executing Query: SELECT book_id, qty FROM orders WHERE username = %s | Params: drp
+2025-02-16 10:22:38,648 - Executing Query: SELECT title, author, price FROM books WHERE id = %s | Params: 3 7 5
+2025-02-16 10:22:38,648 - Database error in fetch_order_data: 1054 (42S22): Unknown column 'title' in 'field list'
+2025-02-16 10:22:38,657 - 127.0.0.1 - - [16/Feb/2025 10:22:38] "[35m[1mGET /profile HTTP/1.1[0m" 500 -
+2025-02-16 10:22:38,715 - 127.0.0.1 - - [16/Feb/2025 10:22:38] "[36mGET /profile?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-02-16 10:22:38,720 - 127.0.0.1 - - [16/Feb/2025 10:22:38] "[36mGET /profile?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-02-16 10:22:38,803 - 127.0.0.1 - - [16/Feb/2025 10:22:38] "GET /profile?__debugger__=yes&cmd=resource&f=console.png&s=3IcvGF43HAnKbrGQl3Ot HTTP/1.1" 200 -
+2025-02-16 10:22:38,819 - 127.0.0.1 - - [16/Feb/2025 10:22:38] "[36mGET /profile?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-02-16 10:24:06,689 -  * Detected change in 'C:\\Users\\DHRUV PATEL\\OneDrive\\Desktop\\Projects\\Websites\\book store\\aboutus.py', reloading
+2025-02-16 10:24:07,016 -  * Debugger is active!
+2025-02-16 10:24:07,018 -  * Debugger PIN: 106-718-497
+2025-02-16 10:24:11,052 -  * Detected change in 'C:\\Users\\DHRUV PATEL\\OneDrive\\Desktop\\Projects\\Websites\\book store\\aboutus.py', reloading
+2025-02-16 10:24:11,379 -  * Debugger is active!
+2025-02-16 10:24:11,381 -  * Debugger PIN: 106-718-497
+2025-02-16 10:24:14,669 - Executing Query: SELECT * FROM users WHERE username = %s | Params: drp
+2025-02-16 10:24:14,671 - Executing Query: SELECT book_id, qty FROM orders WHERE username = %s | Params: drp
+2025-02-16 10:24:14,671 - Executing Query: SELECT title, author, price FROM books WHERE id = %s | Params: 3
+2025-02-16 10:24:14,671 - Database error in fetch_order_data: 1054 (42S22): Unknown column 'title' in 'field list'
+2025-02-16 10:24:14,680 - 127.0.0.1 - - [16/Feb/2025 10:24:14] "[35m[1mGET /profile HTTP/1.1[0m" 500 -
+2025-02-16 10:24:14,743 - 127.0.0.1 - - [16/Feb/2025 10:24:14] "[36mGET /profile?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-02-16 10:24:14,745 - 127.0.0.1 - - [16/Feb/2025 10:24:14] "[36mGET /profile?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-02-16 10:24:14,799 - 127.0.0.1 - - [16/Feb/2025 10:24:14] "GET /profile?__debugger__=yes&cmd=resource&f=console.png&s=dXAhSj7l5GMcPpyuELj5 HTTP/1.1" 200 -
+2025-02-16 10:24:14,808 - 127.0.0.1 - - [16/Feb/2025 10:24:14] "[36mGET /profile?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-02-16 10:24:16,509 - Executing Query: SELECT * FROM users WHERE username = %s | Params: drp
+2025-02-16 10:24:16,511 - Executing Query: SELECT book_id, qty FROM orders WHERE username = %s | Params: drp
+2025-02-16 10:24:16,511 - Executing Query: SELECT title, author, price FROM books WHERE id = %s | Params: 3
+2025-02-16 10:24:16,512 - Database error in fetch_order_data: 1054 (42S22): Unknown column 'title' in 'field list'
+2025-02-16 10:24:16,515 - 127.0.0.1 - - [16/Feb/2025 10:24:16] "[35m[1mGET /profile HTTP/1.1[0m" 500 -
+2025-02-16 10:24:16,526 - 127.0.0.1 - - [16/Feb/2025 10:24:16] "[36mGET /profile?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-02-16 10:24:16,528 - 127.0.0.1 - - [16/Feb/2025 10:24:16] "[36mGET /profile?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-02-16 10:24:16,574 - 127.0.0.1 - - [16/Feb/2025 10:24:16] "[36mGET /profile?__debugger__=yes&cmd=resource&f=console.png&s=dXAhSj7l5GMcPpyuELj5 HTTP/1.1[0m" 304 -
+2025-02-16 10:24:16,632 - 127.0.0.1 - - [16/Feb/2025 10:24:16] "[36mGET /profile?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-02-16 10:24:16,927 - Executing Query: SELECT * FROM users WHERE username = %s | Params: drp
+2025-02-16 10:24:16,928 - Executing Query: SELECT book_id, qty FROM orders WHERE username = %s | Params: drp
+2025-02-16 10:24:16,928 - Executing Query: SELECT title, author, price FROM books WHERE id = %s | Params: 3
+2025-02-16 10:24:16,929 - Database error in fetch_order_data: 1054 (42S22): Unknown column 'title' in 'field list'
+2025-02-16 10:24:16,932 - 127.0.0.1 - - [16/Feb/2025 10:24:16] "[35m[1mGET /profile HTTP/1.1[0m" 500 -
+2025-02-16 10:24:16,944 - 127.0.0.1 - - [16/Feb/2025 10:24:16] "[36mGET /profile?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-02-16 10:24:16,945 - 127.0.0.1 - - [16/Feb/2025 10:24:16] "[36mGET /profile?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-02-16 10:24:16,981 - 127.0.0.1 - - [16/Feb/2025 10:24:16] "[36mGET /profile?__debugger__=yes&cmd=resource&f=console.png&s=dXAhSj7l5GMcPpyuELj5 HTTP/1.1[0m" 304 -
+2025-02-16 10:24:17,046 - 127.0.0.1 - - [16/Feb/2025 10:24:17] "[36mGET /profile?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-02-16 10:24:17,441 - Executing Query: SELECT * FROM users WHERE username = %s | Params: drp
+2025-02-16 10:24:17,443 - Executing Query: SELECT book_id, qty FROM orders WHERE username = %s | Params: drp
+2025-02-16 10:24:17,443 - Executing Query: SELECT title, author, price FROM books WHERE id = %s | Params: 3
+2025-02-16 10:24:17,443 - Database error in fetch_order_data: 1054 (42S22): Unknown column 'title' in 'field list'
+2025-02-16 10:24:17,447 - 127.0.0.1 - - [16/Feb/2025 10:24:17] "[35m[1mGET /profile HTTP/1.1[0m" 500 -
+2025-02-16 10:24:17,462 - 127.0.0.1 - - [16/Feb/2025 10:24:17] "[36mGET /profile?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-02-16 10:24:17,464 - 127.0.0.1 - - [16/Feb/2025 10:24:17] "[36mGET /profile?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-02-16 10:24:17,501 - 127.0.0.1 - - [16/Feb/2025 10:24:17] "[36mGET /profile?__debugger__=yes&cmd=resource&f=console.png&s=dXAhSj7l5GMcPpyuELj5 HTTP/1.1[0m" 304 -
+2025-02-16 10:24:17,566 - 127.0.0.1 - - [16/Feb/2025 10:24:17] "[36mGET /profile?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-02-16 10:24:17,587 - Executing Query: SELECT * FROM users WHERE username = %s | Params: drp
+2025-02-16 10:24:17,590 - Executing Query: SELECT book_id, qty FROM orders WHERE username = %s | Params: drp
+2025-02-16 10:24:17,590 - Executing Query: SELECT title, author, price FROM books WHERE id = %s | Params: 3
+2025-02-16 10:24:17,590 - Database error in fetch_order_data: 1054 (42S22): Unknown column 'title' in 'field list'
+2025-02-16 10:24:17,594 - 127.0.0.1 - - [16/Feb/2025 10:24:17] "[35m[1mGET /profile HTTP/1.1[0m" 500 -
+2025-02-16 10:24:17,606 - 127.0.0.1 - - [16/Feb/2025 10:24:17] "[36mGET /profile?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-02-16 10:24:17,611 - 127.0.0.1 - - [16/Feb/2025 10:24:17] "[36mGET /profile?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-02-16 10:24:17,652 - 127.0.0.1 - - [16/Feb/2025 10:24:17] "[36mGET /profile?__debugger__=yes&cmd=resource&f=console.png&s=dXAhSj7l5GMcPpyuELj5 HTTP/1.1[0m" 304 -
+2025-02-16 10:24:17,713 - 127.0.0.1 - - [16/Feb/2025 10:24:17] "[36mGET /profile?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-02-16 10:24:17,811 - Executing Query: SELECT * FROM users WHERE username = %s | Params: drp
+2025-02-16 10:24:17,815 - Executing Query: SELECT book_id, qty FROM orders WHERE username = %s | Params: drp
+2025-02-16 10:24:17,815 - Executing Query: SELECT title, author, price FROM books WHERE id = %s | Params: 3
+2025-02-16 10:24:17,816 - Database error in fetch_order_data: 1054 (42S22): Unknown column 'title' in 'field list'
+2025-02-16 10:24:17,820 - 127.0.0.1 - - [16/Feb/2025 10:24:17] "[35m[1mGET /profile HTTP/1.1[0m" 500 -
+2025-02-16 10:24:17,832 - 127.0.0.1 - - [16/Feb/2025 10:24:17] "[36mGET /profile?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-02-16 10:24:17,838 - 127.0.0.1 - - [16/Feb/2025 10:24:17] "[36mGET /profile?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-02-16 10:24:17,862 - 127.0.0.1 - - [16/Feb/2025 10:24:17] "[36mGET /profile?__debugger__=yes&cmd=resource&f=console.png&s=dXAhSj7l5GMcPpyuELj5 HTTP/1.1[0m" 304 -
+2025-02-16 10:24:17,917 - 127.0.0.1 - - [16/Feb/2025 10:24:17] "[36mGET /profile?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-02-16 10:25:17,978 -  * Detected change in 'C:\\Users\\DHRUV PATEL\\OneDrive\\Desktop\\Projects\\Websites\\book store\\aboutus.py', reloading
+2025-02-16 10:25:18,354 -  * Debugger is active!
+2025-02-16 10:25:18,356 -  * Debugger PIN: 106-718-497
+2025-02-16 10:25:55,448 - Executing Query: SELECT * FROM users WHERE username = %s | Params: drp
+2025-02-16 10:25:55,449 - Executing Query: SELECT book_id, qty FROM orders WHERE username = %s | Params: drp
+2025-02-16 10:25:55,449 - Executing Query: SELECT title, author, price FROM books WHERE id = %s | Params: 3 7 5
+2025-02-16 10:25:55,450 - Database error in fetch_order_data: 1054 (42S22): Unknown column 'title' in 'field list'
+2025-02-16 10:25:55,463 - 127.0.0.1 - - [16/Feb/2025 10:25:55] "GET /profile HTTP/1.1" 200 -
+2025-02-16 10:25:55,522 - 127.0.0.1 - - [16/Feb/2025 10:25:55] "[36mGET /static/main.css HTTP/1.1[0m" 304 -
+2025-02-16 10:25:55,526 - 127.0.0.1 - - [16/Feb/2025 10:25:55] "[36mGET /static/images/logo.png?v=1 HTTP/1.1[0m" 304 -
+2025-02-16 10:26:04,681 - Executing Query: SELECT * FROM users WHERE username = %s | Params: drp
+2025-02-16 10:26:04,682 - Executing Query: SELECT book_id, qty FROM orders WHERE username = %s | Params: drp
+2025-02-16 10:26:04,683 - Executing Query: SELECT title, author, price FROM books WHERE id = %s | Params: 3 7 5
+2025-02-16 10:26:04,683 - Database error in fetch_order_data: 1054 (42S22): Unknown column 'title' in 'field list'
+2025-02-16 10:26:04,683 - 127.0.0.1 - - [16/Feb/2025 10:26:04] "GET /profile HTTP/1.1" 200 -
+2025-02-16 10:26:04,694 - 127.0.0.1 - - [16/Feb/2025 10:26:04] "[36mGET /static/main.css HTTP/1.1[0m" 304 -
+2025-02-16 10:26:04,695 - 127.0.0.1 - - [16/Feb/2025 10:26:04] "[36mGET /static/images/logo.png?v=1 HTTP/1.1[0m" 304 -
+2025-02-16 10:27:01,740 - Executing Query: SELECT * FROM users WHERE username = %s | Params: drp
+2025-02-16 10:27:01,742 - Executing Query: SELECT book_id, qty FROM orders WHERE username = %s | Params: drp
+2025-02-16 10:27:01,743 - Executing Query: SELECT title, author, price FROM books WHERE id = %s | Params: 3 7 5
+2025-02-16 10:27:01,743 - Database error in fetch_order_data: 1054 (42S22): Unknown column 'title' in 'field list'
+2025-02-16 10:27:01,748 - 127.0.0.1 - - [16/Feb/2025 10:27:01] "GET /profile HTTP/1.1" 200 -
+2025-02-16 10:27:01,763 - 127.0.0.1 - - [16/Feb/2025 10:27:01] "[36mGET /static/main.css HTTP/1.1[0m" 304 -
+2025-02-16 10:27:01,763 - 127.0.0.1 - - [16/Feb/2025 10:27:01] "[36mGET /static/images/logo.png?v=1 HTTP/1.1[0m" 304 -
+2025-02-16 10:27:35,755 - Executing Query: SELECT * FROM users WHERE username = %s | Params: drp
+2025-02-16 10:27:35,758 - Executing Query: SELECT book_id, qty FROM orders WHERE username = %s | Params: drp
+2025-02-16 10:27:35,758 - Executing Query: SELECT title, author, price FROM books WHERE id = %s | Params: 3 7 5
+2025-02-16 10:27:35,759 - Database error in fetch_order_data: 1054 (42S22): Unknown column 'title' in 'field list'
+2025-02-16 10:27:35,777 - 127.0.0.1 - - [16/Feb/2025 10:27:35] "GET /profile HTTP/1.1" 200 -
+2025-02-16 10:27:35,790 - 127.0.0.1 - - [16/Feb/2025 10:27:35] "[36mGET /static/main.css HTTP/1.1[0m" 304 -
+2025-02-16 10:27:35,791 - 127.0.0.1 - - [16/Feb/2025 10:27:35] "[36mGET /static/images/logo.png?v=1 HTTP/1.1[0m" 304 -
+2025-02-16 10:28:25,577 -  * Detected change in 'C:\\Users\\DHRUV PATEL\\OneDrive\\Desktop\\Projects\\Websites\\book store\\aboutus.py', reloading
+2025-02-16 10:28:25,871 -  * Debugger is active!
+2025-02-16 10:28:25,873 -  * Debugger PIN: 106-718-497
+2025-02-16 10:28:26,887 -  * Detected change in 'C:\\Users\\DHRUV PATEL\\OneDrive\\Desktop\\Projects\\Websites\\book store\\aboutus.py', reloading
+2025-02-16 10:28:27,204 -  * Debugger is active!
+2025-02-16 10:28:27,206 -  * Debugger PIN: 106-718-497
+2025-02-16 10:28:28,222 -  * Detected change in 'C:\\Users\\DHRUV PATEL\\OneDrive\\Desktop\\Projects\\Websites\\book store\\aboutus.py', reloading
+2025-02-16 10:28:28,539 -  * Debugger is active!
+2025-02-16 10:28:28,541 -  * Debugger PIN: 106-718-497
+2025-02-16 10:28:30,566 -  * Detected change in 'C:\\Users\\DHRUV PATEL\\OneDrive\\Desktop\\Projects\\Websites\\book store\\aboutus.py', reloading
+2025-02-16 10:28:30,943 -  * Debugger is active!
+2025-02-16 10:28:30,945 -  * Debugger PIN: 106-718-497
+2025-02-16 10:28:31,969 -  * Detected change in 'C:\\Users\\DHRUV PATEL\\OneDrive\\Desktop\\Projects\\Websites\\book store\\aboutus.py', reloading

@@ -15,7 +15,7 @@ def contactus():
             return redirect(url_for('contactus.contactus'))
 
         data = [name, email, message]
-        save_data(data)
+        save_data(data) 
         flash("Your message has been sent successfully!", "success")
         return redirect(url_for('contactus.contactus'))
 

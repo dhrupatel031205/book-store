@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -19,7 +20,8 @@
             animation: fadeInUp 0.5s ease-in-out forwards;
         }
 
-        .table th, .table td {
+        .table th,
+        .table td {
             text-align: center;
         }
 
@@ -33,6 +35,7 @@
                 opacity: 0;
                 transform: translateY(20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -40,6 +43,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container mt-4">
         <h2 class="text-center">Your Bill</h2>
@@ -60,8 +64,8 @@
                     <td>{{ book['title'] }}</td>
                     <td>{{ book['author'] }}</td>
                     <td>Rs. {{ book['price'] }}</td>
-                    <td>{{ book["quantity"] }}</td>  
-                    <td>Rs. {{ book["total_price"] }}</td>  
+                    <td>{{ book["quantity"] }}</td>
+                    <td>Rs. {{ book["total_price"] }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -71,16 +75,11 @@
 
         <div class="text-center mt-4">
             <a href="/store" class="btn btn-success">Continue Shopping</a>
-            <button class="btn btn-primary" id="proceedPayment">Proceed to Payment</button>
+            <form action="/payment" method="POST" class="mt-2 d-flex justify-content-center ">
+                <button type="submit" class="btn btn-primary">Proceed to Payment</button>
+            </form>
         </div>
     </div>
-
-    <script>
-        document.getElementById("proceedPayment").addEventListener("click", function() {
-            if (confirm("Your order has been placed successfully!")) {
-                window.location.href = "/place_order";
-            }
-        });
-    </script>
 </body>
+
 </html>
