@@ -99,7 +99,8 @@ def send_orders_data(username):
         order_info = {
             "order_id": order[0],
             "username": order[1],
-            "qty" : order[3],
+            "qty" : [int(q) for q in order[3].split()]
+,
             "books": books_info,
             "total_price": sum(book[1] for book in books_info if book)  # Calculate total price
         }
