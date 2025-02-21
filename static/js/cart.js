@@ -1,18 +1,22 @@
 document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll(".remove-item").forEach((button) => {
-        button.addEventListener("click", function () {
-            let bookId = this.getAttribute("data-book-id");
+    document.querySelector(".remove-item").addEventListener("click", function (event) {
+        if (event.target.classList.contains("remove-item")) {
+            let bookId = event.target.getAttribute("data-book-id");
+
+            if (!bookId) {
+                console.error("Book ID not found!");
+                return;
+            }
 
             console.log("Extracted Book ID:", bookId);
 
-            // Ensure bookId is being sent in correct JSON format
-            var payload = JSON.stringify({ book_id: parseInt(bookId) ,"hi" :123,});
+            let payload = JSON.stringify({ book_id: Number(bookId) });
             console.log("Sending payload:", payload);
 
-            fetch("/remove_from_cart", {
+            fetch("/remove_fr", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: payload,
+                body: payload
             })
             .then(async (response) => {
                 console.log("Raw response:", response);
@@ -25,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .then((data) => {
                 console.log("Server Response:", data);
                 if (data.success) {
-                    this.closest(".card").remove();
+                    event.target.closest(".card").remove();
 
                     const grandTotalElement = document.getElementById("grand-total");
                     if (grandTotalElement) {
@@ -47,6 +51,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.error("Fetch error:", error);
                 alert("An error occurred: " + error.message);
             });
-        });
+        }
     });
 });

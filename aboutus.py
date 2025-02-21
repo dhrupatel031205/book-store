@@ -8,10 +8,10 @@ aboutus_bp = Blueprint('aboutus', __name__)
 def aboutus():
     username = session.get('username')
     if not username:
-        return redirect(url_for('login'))  # Redirect if not logged in
+        return redirect(url_for('login')) 
 
     user = fetch_user_data(username)
-    order = orders(username)
+    order = send_orders_data(username)  # Fetch detailed order data
     return render_template('aboutus.html', userdata=user, orders=order)
 
 
@@ -42,11 +42,11 @@ def fetch_user_data(username):
         
         query = "SELECT * FROM users WHERE username = %s"
         cursor.execute(query, (username,))
-        userdata = cursor.fetchall()
+        userdata = cursor.fetchall()  # Use fetchone() instead of fetchall() for a single user
         
         return userdata
     except Exception as e:
-        return None
+        print(e)
     finally:
         if cursor:
             cursor.close()
@@ -54,18 +54,55 @@ def fetch_user_data(username):
             conn.close()
 
 def orders(username):
-    
     conn = get_db_connection()
     cursor = conn.cursor()
     
     try:
-        query = "SELECT order_id, book_id, qty, bill_amount, order_date FROM orders WHERE username = %s ORDER BY order_date DESC"
+        query = "SELECT * FROM orders WHERE username = %s"
         cursor.execute(query, (username,))
         orders = cursor.fetchall()
         return orders
     except Exception as e:
         print(e)
+        return []
     finally:
         cursor.close()
         conn.close()
+
+def fetch_book_data(id):
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        query = "SELECT book_name, book_price FROM books WHERE id = %s"
+        cursor.execute(query, (id,))
+
+        books_data = cursor.fetchone()  # Use fetchone() for a single book
+        return books_data
+    except Exception as e:
+        print(e)
+        return None
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
+
+def send_orders_data(username):
+    order_details = orders(username)
+    final_details = []
+
+    for order in order_details:
+        book_ids = [int(num) for num in order[2].split() if num.isdigit()]
+        books_info = [fetch_book_data(book_id) for book_id in book_ids]
         
+        order_info = {
+            "order_id": order[0],
+            "username": order[1],
+            "qty" : order[3],
+            "books": books_info,
+            "total_price": sum(book[1] for book in books_info if book)  # Calculate total price
+        }
+        final_details.append(order_info)
+    
+    return final_details

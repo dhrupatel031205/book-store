@@ -148,33 +148,40 @@ def payment():
     
     return redirect(url_for('aboutus.aboutus'))
 
-@cart_bp.route('/remove_from_cart', methods=['POST'])
+@cart_bp.route('/remove_fr', methods=['POST'])
 def remove_from_cart():
-    if not request.is_json:
-        return jsonify({'error': 'Invalid request format'}), 400
-    
+    if 'username' not in session:
+        return jsonify({"success": False, "error": "Not logged in"}), 401
+
+    print(f"Raw request data: {request.data}")
+    print(f"Parsed JSON data: {request.get_json()}")
+
+    data = request.get_json()
+    book_id = data.get("book_id")
+    book_id = int(book_id) if book_id else None
+
+    if not book_id:
+        return jsonify({"success": False, "error": "Book ID missing"}), 400
+
+    username = session.get('username')
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
     try:
-        # Check if user is logged in
-        if 'username' not in session:
-            return jsonify({'error': 'User not logged in'}), 401
-        
-        username = session['username']
-        data = request.json
-        book_id = data.get('book_id')
-        conn = get_db_connection()
-        cursor = conn.cursor()
-        
-        # Remove the book from the cart
         cursor.execute("DELETE FROM cart WHERE username = %s AND book_id = %s", (username, book_id))
         conn.commit()
-        
-        new_total = total_cart_rate()
-        return jsonify({'success': True, 'new_total': new_total})
-    
+
+        if cursor.rowcount == 0:
+            return jsonify({"success": False, "error": "Book not found in cart"}), 404
+
+        session['cartData'] = fetch_cart_details(username)
+        new_total = total_cart_rate()  # No argument passed here
+        return jsonify({"success": True, "new_total": new_total})
+
     except Exception as e:
-        print("Error:", e)
-        return jsonify({'error': 'An error occurred while removing the book'}), 500
-    
+        conn.rollback()
+        return jsonify({"success": False, "error": str(e)}), 500
+
     finally:
         cursor.close()
         conn.close()
