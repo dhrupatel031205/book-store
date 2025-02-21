@@ -1,5 +1,6 @@
-from flask import Blueprint, render_template, request, redirect, url_for, session, flash
+from flask import Blueprint, render_template, request, redirect, url_for, session, flash,jsonify
 from db_connection import get_db_connection
+import logging
 
 cart_bp = Blueprint('cart', __name__)
 
@@ -145,3 +146,53 @@ def payment():
         conn.close()
     
     return redirect(url_for('aboutus.aboutus'))
+
+@cart_bp.route('/remove_from_cart', methods=['POST'])
+def remove_from_cart():
+    logging.debug("🟡 Received request at /remove_from_cart")
+
+    if 'username' not in session:
+        logging.warning("🔴 User not logged in! Redirecting...")
+        return jsonify({"success": False, "error": "Not logged in"}), 401
+
+    data = request.get_json()
+    logging.debug(f"🟢 Received request data: {data}")
+
+    book_id = data.get("book_id")
+    username = session.get('username')
+
+    if not book_id:
+        logging.error("🔴 Book ID missing from request!")
+        return jsonify({"success": False, "error": "Book ID missing"}), 400
+
+    logging.info(f"🔹 Removing book ID {book_id} from cart of user '{username}'")
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    try:
+        cursor.execute("DELETE FROM cart WHERE username = %s AND book_id = %s", (username, book_id))
+        conn.commit()
+
+        if cursor.rowcount == 0:  # No rows affected
+            logging.warning(f"⚠️ No book with ID {book_id} found in cart for user '{username}'")
+            return jsonify({"success": False, "error": "Book not found in cart"}), 404
+
+        logging.info(f"✅ Successfully removed book ID {book_id} from cart")
+
+        # Refresh session cart data
+        session['cartData'] = fetch_cart_details(username)
+        new_total = total_cart_rate()
+
+        logging.debug(f"🟢 New cart total after removal: {new_total}")
+        return jsonify({"success": True, "new_total": new_total})
+
+    except Exception as e:
+        conn.rollback()
+        logging.error(f"🔴 Database error: {e}")
+        return jsonify({"success": False, "error": str(e)})
+
+    finally:
+        cursor.close()
+        conn.close()
+        logging.debug("🟢 Database connection closed")

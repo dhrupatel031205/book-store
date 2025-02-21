@@ -144,7 +144,7 @@
                 <p class="card-text">Price: Rs. {{ book['price'] }}</p>
                 <p class="card-text">Quantity: <span class="quantity">{{ book['quantity'] }}</span></p>
                 <p class="card-text total-price">Total: Rs. <span class="total">{{ book['total_price'] }}</span></p>
-                <button class="btn btn-danger remove-item" data-book-id="{{ book['id'] }}">Remove</button>
+                <button class="btn btn-danger remove-item" data-book-id~="{{ book[0] }}">Remove</button>
               </div>
             </div>
           </div>
@@ -166,6 +166,8 @@
     </div>
     {% endif %}
   </div>
+
+  <script src="../static/js/cart.js"></script>
 </body>
 
 </html>
