@@ -101,6 +101,7 @@ def total_cart_rate():
     total = sum(item['total_price'] for item in session.get('cartData', []))
     session['total'] = total
     return total
+
 @cart_bp.route('/payment', methods=['POST'])
 def payment():
     print("🔹 Payment route triggered")
@@ -146,45 +147,34 @@ def payment():
         conn.close()
     
     return redirect(url_for('aboutus.aboutus'))
+
 @cart_bp.route('/remove_from_cart', methods=['POST'])
 def remove_from_cart():
-    if 'username' not in session:
-        print("❌ User not logged in. Cannot remove from cart.")
-        return jsonify({"success": False, "error": "Not logged in"}), 401
-
-    data = request.get_json()
-    book_id = data.get("book_id")
-    username = session.get('username')
-
-    if not book_id:
-        print("❌ Error: Book ID missing in remove request.")
-        return jsonify({"success": False, "error": "Book ID missing"}), 400
-
-    print(f"🔹 Removing book ID {book_id} from {username}'s cart.")
-
-    conn = get_db_connection()
-    cursor = conn.cursor()
-
+    if not request.is_json:
+        return jsonify({'error': 'Invalid request format'}), 400
+    
     try:
+        # Check if user is logged in
+        if 'username' not in session:
+            return jsonify({'error': 'User not logged in'}), 401
+        
+        username = session['username']
+        data = request.json
+        book_id = data.get('book_id')
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        
+        # Remove the book from the cart
         cursor.execute("DELETE FROM cart WHERE username = %s AND book_id = %s", (username, book_id))
         conn.commit()
-
-        if cursor.rowcount == 0:
-            print(f"⚠️ Warning: Book ID {book_id} not found in cart.")
-            return jsonify({"success": False, "error": "Book not found in cart"}), 404
-
-        # Important: Recalculate cart details after removing an item
-        session['cartData'] = fetch_cart_details(username) # Make sure this function is defined and works correctly
-        new_total = total_cart_rate() # Make sure this function is defined and works correctly
-
-        print(f"✅ Book removed. New total: {new_total}")
-        return jsonify({"success": True, "new_total": new_total})
-
+        
+        new_total = total_cart_rate()
+        return jsonify({'success': True, 'new_total': new_total})
+    
     except Exception as e:
-        conn.rollback()
-        print(f"❌ Error removing book: {e}")
-        return jsonify({"success": False, "error": str(e)}), 500 # Return 500 for internal server errors
-
+        print("Error:", e)
+        return jsonify({'error': 'An error occurred while removing the book'}), 500
+    
     finally:
         cursor.close()
         conn.close()

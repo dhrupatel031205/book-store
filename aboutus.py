@@ -11,8 +11,8 @@ def aboutus():
         return redirect(url_for('login'))  # Redirect if not logged in
 
     user = fetch_user_data(username)
-    orders = fetch_order_data(username)
-    return render_template('aboutus.html', userdata=user, orders=orders)
+    order = orders(username)
+    return render_template('aboutus.html', userdata=user, orders=order)
 
 
 @aboutus_bp.route('/update_profile', methods=['POST'])
@@ -53,31 +53,19 @@ def fetch_user_data(username):
         if conn:
             conn.close()
 
-
-def fetch_order_data(username):
+def orders(username):
+    
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
     try:
-        conn = get_db_connection()
-        cursor = conn.cursor()
-        order_details = []
-
-        query = "SELECT * FROM orders WHERE orders = %s"
-        cursor.execute(query,(username,))
+        query = "SELECT order_id, book_id, qty, bill_amount, order_date FROM orders WHERE username = %s ORDER BY order_date DESC"
+        cursor.execute(query, (username,))
         orders = cursor.fetchall()
-        
-        for order in orders :
-            book_id = order[1].split()
-            qty = order[2].split()
-            
-            for id in book_id :
-                bookquery = "SELECT * from books WHERE id = %"
-                cursor.execute(bookquery,(id,))
-                
-        
-        return order_details
+        return orders
     except Exception as e:
-        return []  # Return empty list to prevent 'NoneType' errors
+        print(e)
     finally:
-        if cursor:
-            cursor.close()
-        if conn:
-            conn.close()
+        cursor.close()
+        conn.close()
+        

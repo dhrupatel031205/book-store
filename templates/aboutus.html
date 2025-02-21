@@ -118,16 +118,31 @@
                 <h4>Orders Details:</h4>
             </div>
             <table class="table table-success table-bordered">
-                <thead>
-                    <td>Hi</td>
-                    <td>HI</td>
-                    <td>Hi</td>
-                </thead>
                 <tbody>
-                    {% for orders in orders %}
-                    <td>Hi</td>
-                    <td>HI</td>
-                    <td>Hi</td>
+                    {% for orders in order %}
+                    <table border="1">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Book IDs</th>
+                                <th>Quantities</th>
+                                <th>Total Amount</th>
+                                <th>Order Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for order in orders %}
+                            <tr>
+                                <td>{{ order[0] }}</td>
+                                <td>{{ order[1] }}</td>
+                                <td>{{ order[2] }}</td>
+                                <td>${{ order[3] }}</td>
+                                <td>{{ order[4] }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
                     {% endfor %}
                 </tbody>
             </table>
