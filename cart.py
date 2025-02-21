@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash,jsonify
 from db_connection import get_db_connection
-import logging
+# import logging
 
 cart_bp = Blueprint('cart', __name__)
 
@@ -146,53 +146,45 @@ def payment():
         conn.close()
     
     return redirect(url_for('aboutus.aboutus'))
-
 @cart_bp.route('/remove_from_cart', methods=['POST'])
 def remove_from_cart():
-    logging.debug("🟡 Received request at /remove_from_cart")
-
     if 'username' not in session:
-        logging.warning("🔴 User not logged in! Redirecting...")
+        print("❌ User not logged in. Cannot remove from cart.")
         return jsonify({"success": False, "error": "Not logged in"}), 401
 
     data = request.get_json()
-    logging.debug(f"🟢 Received request data: {data}")
-
     book_id = data.get("book_id")
     username = session.get('username')
 
     if not book_id:
-        logging.error("🔴 Book ID missing from request!")
+        print("❌ Error: Book ID missing in remove request.")
         return jsonify({"success": False, "error": "Book ID missing"}), 400
 
-    logging.info(f"🔹 Removing book ID {book_id} from cart of user '{username}'")
+    print(f"🔹 Removing book ID {book_id} from {username}'s cart.")
 
     conn = get_db_connection()
     cursor = conn.cursor()
-    
+
     try:
         cursor.execute("DELETE FROM cart WHERE username = %s AND book_id = %s", (username, book_id))
         conn.commit()
 
-        if cursor.rowcount == 0:  # No rows affected
-            logging.warning(f"⚠️ No book with ID {book_id} found in cart for user '{username}'")
+        if cursor.rowcount == 0:
+            print(f"⚠️ Warning: Book ID {book_id} not found in cart.")
             return jsonify({"success": False, "error": "Book not found in cart"}), 404
 
-        logging.info(f"✅ Successfully removed book ID {book_id} from cart")
+        # Important: Recalculate cart details after removing an item
+        session['cartData'] = fetch_cart_details(username) # Make sure this function is defined and works correctly
+        new_total = total_cart_rate() # Make sure this function is defined and works correctly
 
-        # Refresh session cart data
-        session['cartData'] = fetch_cart_details(username)
-        new_total = total_cart_rate()
-
-        logging.debug(f"🟢 New cart total after removal: {new_total}")
+        print(f"✅ Book removed. New total: {new_total}")
         return jsonify({"success": True, "new_total": new_total})
 
     except Exception as e:
         conn.rollback()
-        logging.error(f"🔴 Database error: {e}")
-        return jsonify({"success": False, "error": str(e)})
+        print(f"❌ Error removing book: {e}")
+        return jsonify({"success": False, "error": str(e)}), 500 # Return 500 for internal server errors
 
     finally:
         cursor.close()
         conn.close()
-        logging.debug("🟢 Database connection closed")
